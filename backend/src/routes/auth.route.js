@@ -9,7 +9,7 @@ const authRouter = Router();
 authRouter.post("/register",RegisterConroller);
 authRouter.post("/login",LoginController);
 authRouter.get("/getme",authenticate,getMe);
-authRouter.post("/logout",authenticate,logout);
+authRouter.post("/logout",logout);
 
 
 

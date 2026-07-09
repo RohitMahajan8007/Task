@@ -45,13 +45,19 @@ export const RegisterConroller = async (req, res) => {
 
         const hash = await bcrypt.hash(password, 10)
 
-
         const user = await userModel.create({
             username, email, password: hash,
         })
 
-
-        await sendTokenResponse(user, res, "User Register Successfully....");
+        res.status(201).json({
+            success: true,
+            message: "User Register Successfully....",
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+            }
+        });
 
 
     } catch (error) {
