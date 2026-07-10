@@ -19,6 +19,15 @@ app.use(cors({
 app.use("/api/auth",authRouter);
 app.use("/api/tasks",taskRouter);
 
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        status: "success",
+        message: "Server is healthy",
+       
+    });
+});
+
+
 
 
 export default app;
