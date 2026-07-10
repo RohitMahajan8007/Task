@@ -27,14 +27,19 @@ const Dashboard = () => {
   };
 
   const handleDelete = async (id) => {
+    const previousTasks = [...tasks];
+    
+    // Optimistic update: Remove task from UI immediately
+    setTasks((prev) =>
+      prev.filter((task) => task._id !== id)
+    );
+
     try {
       await DeleteTask(id);
-
-      setTasks((prev) =>
-        prev.filter((task) => task._id !== id)
-      );
     } catch (err) {
       console.log(err);
+      // Rollback on error
+      setTasks(previousTasks);
     }
   };
 
